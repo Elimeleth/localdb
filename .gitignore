@@ -1,0 +1,10 @@
+node_modules
+logs/*
+.env
+dist/*
+.npmignore
+.dockerignore
+postgres/pg-data/
+# .nginx/*
+
+redis/data/*

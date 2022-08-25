@@ -1,0 +1,30 @@
+{
+    "name": "localdb",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "start": "node src/index.js",
+        "dev": "nodemon src/index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "cron": "^2.1.0",
+        "date-fns": "^2.29.1",
+        "dotenv": "^16.0.1",
+        "express": "^4.18.1",
+        "helmet": "^5.1.1",
+        "lodash": "^4.17.21",
+        "lowdb": "^3.0.0",
+        "node-cron": "^3.0.2"
+    },
+    "devDependencies": {
+        "morgan": "^1.10.0",
+        "nodemon": "^2.0.19"
+    }
+}
