@@ -1,7 +1,8 @@
 import { Router } from 'express'
+import { deleteData } from './controllers/delete.controller.js'
 import { getAllData, getData } from './controllers/get.controller.js'
 import { postData } from './controllers/post.controller.js'
-import { deleteData, putData } from './controllers/put.controller.js'
+import { putData } from './controllers/put.controller.js'
 
 export const router = Router()
 

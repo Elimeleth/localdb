@@ -1,4 +1,4 @@
-import { deleteOne } from "../../models/db/initLowDb"
+import { deleteOne } from "../../models/db/initLowDb.js"
 
 export const deleteData = async(req, res) => {
     const { data } = req.body
