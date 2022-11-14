@@ -33,12 +33,14 @@ app.listen(PORT, async() => {
             const data = findMany()
             if (!data.length) return null
             data.map(async d => {
+                console.log('eliminando data')
                 const diff = differenceInSeconds(Date.now(), d.create_at)
                 if (Math.abs(parseInt(diff)) > parseInt(d.expired_at)) {
                     const newData = data.filter(current => current.create_at !== d.create_at)
 
                     await update(newData)
                 } else {
+                    console.log('actualizando data')
                     d.expired_at = Math.abs(d.expired_at - 1)
                     await updateOne(d)
                 }
