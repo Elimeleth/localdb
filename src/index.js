@@ -39,7 +39,7 @@ app.listen(PORT, async() => {
 
                     await update(newData)
                 } else {
-                    d.expired_at = Math.abs(d.expired_at - diff)
+                    d.expired_at = Math.abs(d.expired_at - 1)
                     await updateOne(d)
                 }
             })
