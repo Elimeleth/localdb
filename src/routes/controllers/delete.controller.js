@@ -1,11 +1,11 @@
-import { updateOne, deleteOne } from '../../models/db/initLowDb.js'
+import { deleteOne } from "../../models/db/initLowDb"
 
-export const putData = async(req, res) => {
+export const deleteData = async(req, res) => {
     const { data } = req.body
     if (typeof data !== 'object') return res.status(400).contentType('application/json').json({ message: 'Error de dato' })
 
     try {
-        const result = await updateOne(data)
+        const result = await deleteOne(data)
 
         return res.status(200).contentType('application/json').json({ result })
     } catch (error) {

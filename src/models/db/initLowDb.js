@@ -74,6 +74,7 @@ export const create = async(data) => {
     }
 }
 
+
 export const update = async(data) => {
     if (typeof data !== 'object') return null
 
@@ -94,6 +95,18 @@ export const updateOne = async(data) => {
                 return data
             }
         })
+    } catch (error) {
+        console.log(error)
+    }
+
+    return await db.write()
+}
+
+export const deleteOne = async(data) => {
+    if (typeof data !== 'object') return null
+
+    try {
+        db.data.data = db.data.data.filter(d => d.username !== data.username)
     } catch (error) {
         console.log(error)
     }
