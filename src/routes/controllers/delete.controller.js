@@ -2,6 +2,7 @@ import { deleteOne } from "../../models/db/initLowDb.js"
 
 export const deleteData = async(req, res) => {
     const { data } = req.body
+    console.log('data', data);
     if (typeof data !== 'object') return res.status(400).contentType('application/json').json({ message: 'Error de dato' })
 
     try {
