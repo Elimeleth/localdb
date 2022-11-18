@@ -100,7 +100,9 @@ export const deleteOne = async(data) => {
     if (typeof data !== 'object') return null
 
     try {
-        db.data.data = db.data.data.filter(d => d.username !== data.username)
+        let allData = findMany()
+        allData = allData.filter(d => d.username !== data.username)
+        db.data.data = allData
     } catch (error) {
         console.log(error)
     }
