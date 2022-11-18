@@ -34,12 +34,10 @@ app.listen(PORT, async() => {
             if (!data.length) return null
             data.map(async d => {
                 if (Math.abs(parseInt(d.expired_at) <= 0)) {
-                    console.log('eliminando data')
-                    const newData = data.filter(current => current.create_at !== d.create_at)
+                    const newData = data.filter(current => current.expired_at !== d.expired_at)
 
                     await update(newData)
                 } else {
-                    console.log('actualizando data')
                     d.expired_at = Math.abs(d.expired_at - 1)
                     await updateOne(d)
                 }

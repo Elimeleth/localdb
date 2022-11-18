@@ -28,19 +28,18 @@ export const initDb = async() => {
 export const findOne = (username) => {
     // ...
     // Note: db.data needs to be initialized before lodash.chain is called.
-    db.chain = lodash.chain(db.data)
-    const result = db.chain
-        .get('data')
-        .value() || []
+    // db.chain = lodash.chain(db.data)
+    // const result = db.chain
+    //     .get('data')
+    //     .value() || []
     let data
     try {
-
-        data = result.length ? result.filter(data => data && data.username === username) : []
-
+        let allData = findMany()
+        data = allData.filter(d => d.username === username)
     } catch (error) {
         console.log(error)
     }
-    return data
+    return data || []
 }
 
 export const findMany = () => {
@@ -61,13 +60,13 @@ export const create = async(data) => {
     try {
         // ...
         // Note: db.data needs to be initialized before lodash.chain is called.
+        let allData = findMany()
         const label = formatDistance(subSeconds(Date.now(), parseInt(data.expired_at)), Date.now())
-        db.data.data.push({
-            label,
-            create_at: Date.now(),
-            ...data
-
-        })
+        data.create_at = Date.now()
+        data.label = label
+        allData = allData.filter(d => d.username !== data.username)
+        allData.push(data)
+        db.data.data = allData
         return await db.write()
     } catch (error) {
         console.log(error)
@@ -77,7 +76,6 @@ export const create = async(data) => {
 
 export const update = async(data) => {
     if (typeof data !== 'object') return null
-
     db.data.data = data
 
     return await db.write()
@@ -87,14 +85,10 @@ export const updateOne = async(data) => {
     if (typeof data !== 'object') return null
 
     try {
-        db.data.data = db.data.data.map(d => {
-            if (d) {
-                if (d.create_at === data.create_at) {
-                    d = data
-                }
-                return data
-            }
-        })
+        let allData = findMany()
+        allData = allData.filter(d => d.username !== data.username)
+        allData.push(data)
+        db.data.data = allData
     } catch (error) {
         console.log(error)
     }
